@@ -1,27 +1,36 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_task/firebase_options.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 import 'screens/login_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  if (kIsWeb) {
-    await Firebase.initializeApp(
-      options: const FirebaseOptions(
-        apiKey: String.fromEnvironment('apiKey'),
-        appId: String.fromEnvironment('appId'),
-        messagingSenderId: String.fromEnvironment('messagingSenderId'),
-        projectId: String.fromEnvironment('projectId'),
-        authDomain: String.fromEnvironment('authDomain'),
-        storageBucket: String.fromEnvironment('storageBucket'),
-        measurementId: String.fromEnvironment('measurementId'),
-      ),
-    );
-  } else {
-    await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
-  }
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform
+      // options: FirebaseOptions(
+      //   apiKey: kIsWeb
+      //       ? const String.fromEnvironment('web_apiKey')
+      //       : TargetPlatform.android == defaultTargetPlatform
+      //           ? const String.fromEnvironment('android_apiKey')
+      //           : const String.fromEnvironment('ios_apiKey'),
+      //   appId: kIsWeb
+      //       ? const String.fromEnvironment('web_appId')
+      //       : TargetPlatform.android == defaultTargetPlatform
+      //           ? const String.fromEnvironment('android_appId')
+      //           : const String.fromEnvironment('ios_appId'),
+      //   messagingSenderId: const String.fromEnvironment('messagingSenderId'),
+      //   projectId: const String.fromEnvironment('projectId'),
+      //   storageBucket: const String.fromEnvironment('storageBucket'),
+      //   authDomain: kIsWeb ? const String.fromEnvironment('authDomain') : null,
+      //   measurementId: kIsWeb ? const String.fromEnvironment('measurementId') : null,
+      //   iosClientId: TargetPlatform.iOS == defaultTargetPlatform
+      //       ? const String.fromEnvironment('iosClientId')
+      //       : null,
+      //   iosBundleId: TargetPlatform.iOS == defaultTargetPlatform
+      //       ? const String.fromEnvironment('iosBundleId')
+      //       : null,
+      // ),
+      );
   runApp(const MyApp());
 }
 
